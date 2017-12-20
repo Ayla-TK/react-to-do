@@ -34,11 +34,10 @@ class App extends Component {
        this.setState({ todos: todos });
        }
 
-  deleteTodo(taskToDelete) {
-       var newTodos = this.state.items.filter((_todo) => {
-          return _todo !==  taskToDelete
-        })
-          this.setState({ todos: newTodos });
+  deleteTodo(index) {
+    console.log(index);
+    const todos = this.state.todos.filter(function(value,idx,array) { return idx !== index;});
+    this.setState({ todos: todos });
 
 
       }
@@ -50,7 +49,7 @@ class App extends Component {
 
         { this.state.todos.map( (todo, index) =>
         <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) }
-        deleteTodo ={this.deleteTodo}
+         deleteTodo={ () => this.deleteTodo(index) }
         />
         )}
 
